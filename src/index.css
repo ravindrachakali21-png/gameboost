@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Manrope", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  --color-ink: #1f2d3d;
+  --color-ink-soft: #5b6b7d;
+  --color-cyan: #2bc4f0;
+  --color-blue: #2a7de1;
+  --color-blue-deep: #1f63c4;
+  --color-sky: #eaf4fb;
+  --color-mist: #f4f8fc;
+  --color-orange: #ff7a18;
+  --color-orange-bright: #ffa033;
+
+  --shadow-card: 0 24px 60px -20px rgba(31, 99, 196, 0.25);
+  --shadow-soft: 0 16px 40px -16px rgba(20, 50, 90, 0.18);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: var(--font-body);
+    color: var(--color-ink);
+    background: #ffffff;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  .gradient-hero {
+    background: linear-gradient(135deg, #2bc4f0 0%, #2a7de1 55%, #1f63c4 100%);
+  }
+  .gradient-cta {
+    background: linear-gradient(90deg, #ff7a18 0%, #ffa033 100%);
+  }
+  .gradient-cta-red {
+    background: linear-gradient(90deg, #ff5a3c 0%, #ff8a18 100%);
+  }
+  .gradient-text {
+    background: linear-gradient(90deg, #2bc4f0, #2a7de1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .tier-cyan { background: linear-gradient(90deg, #29c7e8, #2a9fe1); }
+  .tier-violet { background: linear-gradient(90deg, #8b6cf0, #b86ce8); }
+  .tier-red { background: linear-gradient(90deg, #ff6b5c, #ff8a3c); }
+}
+
+/* watermark words floating in hero */
+.watermark {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.08);
+  letter-spacing: 0.04em;
+  user-select: none;
+  pointer-events: none;
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+.animate-floaty { animation: floaty 5s ease-in-out infinite; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+  opacity: 0;
+}
+.reveal.in {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-floaty { animation: none; }
+  .reveal { opacity: 1; animation: none; }
+  html { scroll-behavior: auto; }
+}
